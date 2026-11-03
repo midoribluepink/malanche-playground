@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>Mi aprendizaje frontend .</h1>
+    <h2>EStoy aprendiendo HTML. </h2>
+    <P> Estoy aprendiendo desarrollo web para poder montar una empresa con mis panas </P>
+    <hr>
+    <p> El primer paso es aprender HTML Y CSS para poder aplicar <br>
+        aplicar esos conocimientos en REACT. </p>
+    
+    <h3> Primera lista: Mis tecnologías favoritas</h3>
+    <ul>
+        <li> JavaScript</li>
+        <li>React</li>
+        <li>CSS</li>
+        <li>HTML</li>
+    </ul>
+
+    <h3> Segunda lista: Mi ruta de aprendizaje</h3>
+    <ol>
+        <li> HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+        <li>React</li>
+        <li>Django</li>
+    </ol>
+    <h2 id="Mi objetivo">Mi objetivo</h2>
+    <img src="imagenes/images.jpeg" 
+         alt="Gyro zepelli"
+         width = "400"
+    > <br>
+
+
+    <a href="https://www.google.com" target="_blank" rel="noopener noreferrer">Visitar Google</a><br>
+    <a href="https://developer.mozilla.org/es/docs/Web/HTML?utm_source=chatgpt.com">MDN Web Docs</a><br> 
+    <a href="#Mi objetivo">Ir a mi objetivo</a>
+    
+
+    <h2>Mi ruta de aprendizaje</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Tecnología</th>
+                <th>Tipo</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Html</td>
+                <td>Marcado</td>
+                <td>Aprendiendo</td>
+            </tr>
+
+             <tr>
+                <td>CSS</td>
+                <td>Estilos</td>
+                <td>Pendiente</td>
+            </tr>
+
+             <tr>
+                <td>JavaScript</td>
+                <td>Programación</td>
+                <td>Aprendiendo</td>
+            </tr>
+
+             <tr>
+                <td>React</td>
+                <td>Biblioteca</td>
+                <td>Pendiente</td>
+            </tr>
+        </tbody>
+
+    </table>    
+
+    <h2>Formulario de contacto</h2>
+    <form action="/contacto" method="POST">
+        <p>Aquí irá mi formulario</p>
+        <label for="nombre" >Nombre:</label>
+        <input type="text" id="nombre" name="nombre" placeholder="Ingresa tu nombre aquí" required>
+        <button type="submit">Enviar</button>
+        <button type="reset">Limpiar</button>
+    </form>
+
+    <form>
+        <label for="correo">Correo:</label>
+        <input type="email" id="correo" placeholder="ingresa tu correo" required>
+        <button type="submit">Enviar</button>
+
+    </form>
+
+    <form>
+        <label for = "contraseña">Contraseña:</label>
+        <input type="password" id="contraseña" placeholder="Escribe tu contraseña" required>
+        <button type="submit">Enviar</button>
+    </form>
+
+    <form>
+        <label for="edad">Edad:</label>
+        <input type="number" id="edad" placeholder="Aquí va la edad" required min="1">
+        <button type="submit">Enviar</button>
+    </form> 
+
+    <form>
+        <label for="mensaje">Mensaje</label>
+        <textarea rows="4" id="mensaje"></textarea>
+        <button type="submit">Enviar</button>
+    </form>
+
+
+    <form action="/contacto" method="POST">
+        <label for="pais">Pais:</label>
+        <select id="pais" name="pais">
+            <option value="mexico">Mexico</option>
+            <option value="argentina">Argentina</option>
+            <option value="colombia">Colombia</option>
+        </select>
+
+    </form>
+
+    <form>
+        <p>¿Cuál es tu nivel de experiencia</p>
+        <input type="radio"  id="principiante" name="nivel" value="principiante">
+        <label for="principiante">Principiante</label>
+
+        <input  type="radio" id="intermedio" name="nivel" value="intermedio">
+        <label for="intermedio">Intermedio</label>
+
+        <input type="radio" id="avanzado" name="nivel" value="avanzado">
+        <label for="avanzado">Avanzado</label>
+    </form>
+
+
+    <form>
+        <p>¿Qué tecnologías conoces</p>
+
+        <input type="checkbox" id="HTML" name="tecnologias" value="HTML">
+        <label for="HTML">HTML</label>
+
+        <input type="checkbox" id="JavaScript" name="tecnologias" value="JavaScript">
+        <label for="JavaScript">JavaScript</label>
+
+        <input type="checkbox" id="CSS" name="tecnologias" value="CSS">
+        <label for="CSS">CSS</label>
+    </form>
+    <script src="script.js" ></script>
+</body>
+</html>
+
+
