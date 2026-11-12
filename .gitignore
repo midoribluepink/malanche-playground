@@ -1,0 +1,53 @@
+# ==========================
+# Python
+# ==========================
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Entornos virtuales
+.venv/
+venv/
+env/
+
+# ==========================
+# Django
+# ==========================
+db.sqlite3
+db.sqlite3-journal
+*.log
+media/
+staticfiles/
+
+# ==========================
+# Variables de entorno
+# ==========================
+.env
+.env.*
+!.env.example
+
+# ==========================
+# Frontend (React / Node.js)
+# ==========================
+node_modules/
+dist/
+build/
+coverage/
+
+# ==========================
+# macOS
+# ==========================
+.DS_Store
+
+# ==========================
+# Editores
+# ==========================
+.vscode/
+.idea/
+
+# ==========================
+# Archivos temporales
+# ==========================
+*.swp
+*.swo
+*.tmp
