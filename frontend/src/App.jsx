@@ -7,7 +7,7 @@ function App() {
     async function obtenerOpiniones() {
         try{
             const respuesta = await fetch(
-                "http://localhost:8000/api/opiniones/"
+                "http://localhost:8000/comentarios/"
             );
 
             if (respuesta.ok) {
@@ -58,7 +58,7 @@ function App() {
 
             <h2>Opiniones</h2>
 
-            {opiniones.map((opinion, indice) => (
+            {opiniones.map((opinion) => (
                 <p key={opinion.id}>{opinion.texto}</p>
             ))}
         </div>
