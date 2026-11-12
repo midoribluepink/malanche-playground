@@ -7,4 +7,4 @@ class Comentario(models.Model):
 
     # Previsualización del objeto Comentario
     def __str__(self):
-        return f"{self.titulo[:25]}"
+        return f"{self.texto[:25]}"
