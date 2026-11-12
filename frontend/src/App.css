@@ -12,6 +12,7 @@ body {
     align-items: center;
     justify-content: flex-start;
     padding-top: 30px;
+    background-color: green;
 }
 
 h1 {

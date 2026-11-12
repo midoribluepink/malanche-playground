@@ -52,7 +52,7 @@ function App() {
                 onChange={(e) => setComentario(e.target.value)}
             ></textarea>
 
-            <button>
+            <button >
                 Enviar comentario
             </button>
 
