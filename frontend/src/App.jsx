@@ -1,23 +1,37 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
     const [comentario, setComentario] = useState("");
     const [opiniones, setOpiniones] = useState([]);
 
     async function obtenerOpiniones() {
-        const respuesta = await fetch(
-            "http://localhost:8000/api/opiniones/"
-        );
+        try{
+            const respuesta = await fetch(
+                "http://localhost:8000/api/opiniones/"
+            );
 
-        if (respuesta.ok) {
-            const datos = await respuesta.json();
-            setOpiniones(datos);
-        } else {
-            console.log("Error al obtener las opiniones");
+            if (respuesta.ok) {
+                const datos = await respuesta.json();
+                if (Array.isArray(datos)){
+                    setOpiniones(datos);
+                } else {
+                    console.log("La respuesta no contiene una lista de opiniones");
+                }
+            } else {
+                console.log("Error HTTP:", respuesta.status);
+            }
+            
+        } catch(error){
+            console.log("Error al procesar la respuesta", error);
         }
     }
+       
 
-    function enviarComentario() {
+    useEffect(() => {
+        obtenerOpiniones();
+    }, []);
+
+   /* function enviarComentario() {
         if (comentario.trim() === "") {
             return;
         }
@@ -25,7 +39,7 @@ function App() {
         setOpiniones([...opiniones, comentario]);
         setComentario("");
     }
-
+*/ 
     return (
         <div className="contenedor">
             <h1>RESEÑAS</h1>
@@ -38,14 +52,14 @@ function App() {
                 onChange={(e) => setComentario(e.target.value)}
             ></textarea>
 
-            <button onClick={enviarComentario}>
+            <button> //onClick={enviarComentario}
                 Enviar comentario
             </button>
 
             <h2>Opiniones</h2>
 
             {opiniones.map((opinion, indice) => (
-                <p key={indice}>{opinion}</p>
+                <p key={opinion.id}>{opinion.texto}</p>
             ))}
         </div>
     );
