@@ -3,9 +3,6 @@ import { useState, useEffect } from "react";
 function App() {
     const [comentario, setComentario] = useState("");
     const [opiniones, setOpiniones] = useState([]);
-    const nuevoComentario = {
-    texto: comentario
-}
 
     async function obtenerOpiniones() {
         try{
@@ -34,15 +31,38 @@ function App() {
         obtenerOpiniones();
     }, []);
 
-    function enviarComentario() {
-        if (comentario.trim() === "") {
-            return;
-        }
-
-        setOpiniones([...opiniones, comentario]);
-        setComentario("");
+   async function enviarComentario() {
+    if (comentario.trim() === "") {
+        return;
     }
 
+    try {
+        const respuesta = await fetch(
+            "http://localhost:8000/comentarios/",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    texto: comentario
+                })
+            }
+        );
+
+        if (respuesta.ok) {
+            const datos = await respuesta.json();
+
+            setOpiniones([...opiniones, datos]);
+            setComentario("");
+        } else {
+            console.log("Error HTTP:", respuesta.status);
+        }
+
+    } catch (error) {
+        console.log("Error al enviar el comentario:", error);
+    }
+}
     return (
         <div className="contenedor">
             <h1>RESEÑAS</h1>
@@ -55,7 +75,7 @@ function App() {
                 onChange={(e) => setComentario(e.target.value)}
             ></textarea>
 
-            <button >
+            <button onClick={enviarComentario}>
                 Enviar comentario
             </button>
 
