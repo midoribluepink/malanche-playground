@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 function App() {
     const [comentario, setComentario] = useState("");
     const [opiniones, setOpiniones] = useState([]);
+    const nuevoComentario = {
+    texto: comentario
+}
 
     async function obtenerOpiniones() {
         try{
@@ -31,7 +34,7 @@ function App() {
         obtenerOpiniones();
     }, []);
 
-   /* function enviarComentario() {
+    function enviarComentario() {
         if (comentario.trim() === "") {
             return;
         }
@@ -39,7 +42,7 @@ function App() {
         setOpiniones([...opiniones, comentario]);
         setComentario("");
     }
-*/ 
+
     return (
         <div className="contenedor">
             <h1>RESEÑAS</h1>
