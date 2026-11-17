@@ -16,9 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from core.views import listar_comentarios
+from core.views import listar_comentarios, obtener_csrf
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('comentarios/', listar_comentarios),
+    path('csrf/', obtener_csrf),
 ]

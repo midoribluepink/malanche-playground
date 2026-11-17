@@ -1,9 +1,13 @@
 from django.http import HttpResponseNotAllowed, JsonResponse
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 from core.models import Comentario
 
 import json
 
+@ensure_csrf_cookie
+def obtener_csrf(request):
+    return JsonResponse({"mensaje": "Cookie CSRF configurada"})
 
 # Vista principal para localhost:8000/comentarios
 def listar_comentarios(request):

@@ -1,5 +1,19 @@
 import { useState, useEffect } from "react";
 
+function obtenerCookie(nombre) {
+    const cookies = document.cookie.split(";");
+
+    for (const cookie of cookies) {
+        const [clave, ...valor] = cookie.trim().split("=");
+
+        if (clave === nombre) {
+            return decodeURIComponent(valor.join("="));
+        }
+    }
+
+    return null;
+}
+
 function App() {
     const [comentario, setComentario] = useState("");
     const [opiniones, setOpiniones] = useState([]);
@@ -26,23 +40,43 @@ function App() {
         }
     }
        
-
     useEffect(() => {
-        obtenerOpiniones();
-    }, []);
+        async function inicializar() {
+            try {
+                await fetch("http://localhost:8000/csrf/", {
+                    credentials: "include"
+                });
 
-   async function enviarComentario() {
+                await obtenerOpiniones();
+            } catch (error) {
+                console.log("Error al obtener CSRF:", error);
+            }
+        }
+
+        inicializar();
+}, []); 
+
+async function enviarComentario() {
     if (comentario.trim() === "") {
         return;
     }
 
     try {
+        const csrfToken = obtenerCookie("csrftoken");
+
+        if (!csrfToken) {
+            console.log("No se encontró el token CSRF");
+            return;
+        }
+
         const respuesta = await fetch(
             "http://localhost:8000/comentarios/",
             {
                 method: "POST",
+                credentials: "include",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": csrfToken
                 },
                 body: JSON.stringify({
                     texto: comentario
@@ -53,7 +87,7 @@ function App() {
         if (respuesta.ok) {
             const datos = await respuesta.json();
 
-            setOpiniones([...opiniones, datos]);
+            setOpiniones((anteriores) => [...anteriores, datos]);
             setComentario("");
         } else {
             console.log("Error HTTP:", respuesta.status);
