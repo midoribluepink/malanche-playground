@@ -31,15 +31,38 @@ function App() {
         obtenerOpiniones();
     }, []);
 
-   /* function enviarComentario() {
-        if (comentario.trim() === "") {
-            return;
+   async function enviarComentario() {
+    if (comentario.trim() === "") {
+        return;
+    }
+
+    try {
+        const respuesta = await fetch(
+            "http://localhost:8000/comentarios/",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    texto: comentario
+                })
+            }
+        );
+
+        if (respuesta.ok) {
+            const datos = await respuesta.json();
+
+            setOpiniones([...opiniones, datos]);
+            setComentario("");
+        } else {
+            console.log("Error HTTP:", respuesta.status);
         }
 
-        setOpiniones([...opiniones, comentario]);
-        setComentario("");
+    } catch (error) {
+        console.log("Error al enviar el comentario:", error);
     }
-*/ 
+}
     return (
         <div className="contenedor">
             <h1>RESEÑAS</h1>
@@ -52,7 +75,7 @@ function App() {
                 onChange={(e) => setComentario(e.target.value)}
             ></textarea>
 
-            <button >
+            <button onClick={enviarComentario}>
                 Enviar comentario
             </button>
 
