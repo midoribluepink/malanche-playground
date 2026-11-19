@@ -11,6 +11,7 @@ from core.serializers import ComentarioModelSerializer
 #---- API COMENTARIOS HECHA EN DRF PARA REFRENCIA --------
 #---------------------------------------------------------
 
+# Función que entrega un token CSRF
 @ensure_csrf_cookie
 @api_view(["GET"])
 def obtener_csrf(request):
