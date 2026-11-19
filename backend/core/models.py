@@ -6,12 +6,16 @@ class Cliente(models.Model):
     apellidos=models.CharField(max_length=150)
     telefono=models.CharField(max_length=20, blank=True)
     fecha_registro=models.DateField(auto_now_add=True)
-    
+
+    # Previsualización del objeto Cliente    
     def __str__(self):
         return f"{self.nombre} {self.apellidos}"
 
-# Modelo de base de datos para los comentarios
 
+
+
+#---- MODELO COMENTARIO PARA LA API ANTIGUA --------------
+#--------------------------------------------------------- 
 class Comentario(models.Model):
     texto=models.TextField(blank=True)
 
