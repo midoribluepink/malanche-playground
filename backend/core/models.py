@@ -17,7 +17,12 @@ class Cliente(models.Model):
 #---- MODELO COMENTARIO PARA LA API ANTIGUA --------------
 #--------------------------------------------------------- 
 class Comentario(models.Model):
-    texto=models.TextField(blank=True)
+    texto=models.TextField()
+    """
+    El campo texto es requerido (required=True) y no acepta
+    cadenas vacías (blank=False) para evitar que DRF acepte como 
+    válidos JSON mal formados.
+    """
 
     # Previsualización del objeto Comentario
     def __str__(self):

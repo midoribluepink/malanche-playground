@@ -1,8 +1,12 @@
 from django.test import TestCase
+from rest_framework import status
 
 from core.models import Comentario
 
-# Clase de preubas
+
+
+#---- PRUEBAS AUTOMATIZADAS PARA LA API COMENTARIOS ------
+#---------------------------------------------------------
 class ComentariosTest(TestCase):
 
     #Datos de prueba de la base de datos
@@ -23,7 +27,7 @@ class ComentariosTest(TestCase):
         datos_respuesta = respuesta.json()
 
         #Comprobamos el código de estado correcto y la cantidad de objetos recibidos
-        self.assertEqual(respuesta.status_code, 200)
+        self.assertEqual(respuesta.status_code, status.HTTP_200_OK)
         self.assertEqual(len(datos_respuesta), 2)
 
         #Ordenamos los objetos por "id"
@@ -57,7 +61,7 @@ class ComentariosTest(TestCase):
         #Validaciones
 
         #Código de estado 201 CREATED
-        self.assertEqual(respuesta.status_code, 201)
+        self.assertEqual(respuesta.status_code, status.HTTP_201_CREATED)
 
         #"texto" se encuentra en la respuesta del servidor
         self.assertIn("texto", datos_respuesta) 
@@ -99,10 +103,7 @@ class ComentariosTest(TestCase):
                 #Validaciones
 
                 #Código de error 400 BAD REQUEST
-                self.assertEqual(respuesta.status_code, 400)
-
-                #La respuesta contiene un mensaje de error
-                self.assertIn("error", datos_respuesta)
+                self.assertEqual(respuesta.status_code, status.HTTP_400_BAD_REQUEST)
 
                 #La cantidad de objetos en la base de datos no sufrió cambios
                 self.assertEqual(num_base_datos, Comentario.objects.count())

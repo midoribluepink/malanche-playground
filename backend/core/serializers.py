@@ -15,4 +15,10 @@ class ClientModelSerializer(serializers.ModelSerializer):
 class ComentarioModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comentario
-        fields = ["texto"]
+        fields = ["id", "texto"]
+
+    # Se comprueba que el campo texto se haya mandado originalmente como una cadena
+    def validate_texto(self, value):
+        if not isinstance(self.initial_data.get("texto"), str):
+            raise serializers.ValidationError("El campo 'texto' debe ser una cadena de texto")
+        return value
