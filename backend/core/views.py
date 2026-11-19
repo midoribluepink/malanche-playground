@@ -1,5 +1,4 @@
-from django.http import JsonResponse
-from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
 from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -13,10 +12,12 @@ from core.serializers import ComentarioModelSerializer
 #---------------------------------------------------------
 
 @ensure_csrf_cookie
+@api_view(["GET"])
 def obtener_csrf(request):
-    return JsonResponse({"mensaje": "Cookie CSRF configurada"})
+    return Response({"mensaje": "Cookie CSRF configurada"})
 
 # Vista principal para localhost:8000/comentarios
+@csrf_protect
 @api_view(["GET", "POST"])
 def listar_comentarios(request):
 
