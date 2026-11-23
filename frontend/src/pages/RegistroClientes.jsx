@@ -8,7 +8,7 @@ function RegistroClientes() {
     const [fechaRegistro, setFechaRegistro] = useState("");
     const [mensaje, setMensaje] = useState("");
 
-    function registrarCliente(evento) {
+    async function registrarCliente(evento) {
         evento.preventDefault();
         if (
             nombre.trim() === "" ||
@@ -20,13 +20,47 @@ function RegistroClientes() {
         return;
     }
         setMensaje("");
-        
+
         const cliente = {
             nombre: nombre,
             apellido: apellidos,
             telefono: telefono,
             fecha_registro: fechaRegistro
         };
+
+        try {
+            const respuesta = await fetch(
+                "http://localhost:8000/clientes/",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(cliente)
+                }
+            );
+
+            if (respuesta.ok) {
+
+                const datos = await respuesta.json();
+
+                console.log(datos);
+
+                setNombre("");
+                setApellidos("");
+                setTelefono("");
+                setFechaRegistro("");
+                                
+            } else {
+                console.log("Error HTTP:", respuesta.status);
+            }
+
+            
+
+        } catch (error) {
+            console.log("Error al registrar el cliente:", error);
+        }
+    
 
         
     }
